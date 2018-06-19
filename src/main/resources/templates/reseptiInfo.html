@@ -15,7 +15,7 @@
         <h2 th:text="${resepti}">Otsikko</h2>
         
         <ul>
-            <li th:each="ainesosa ${ainesosat}">
+            <li th:each="ainesosa : ${ainesosat}">
                 <span th:text="${ainesosa}"></span>
             </li>
         </ul>
