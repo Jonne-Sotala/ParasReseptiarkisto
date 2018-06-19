@@ -1,0 +1,2 @@
+# ParasReseptiarkisto
+Tietokantojen perusteiden kurssityö
