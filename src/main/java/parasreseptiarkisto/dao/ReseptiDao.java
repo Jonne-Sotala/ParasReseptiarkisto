@@ -112,9 +112,15 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
         PreparedStatement statement = 
                 connection.prepareStatement("DELETE FROM Resepti WHERE id = ?");
         statement.setInt(1, key);
-        statement.executeUpdate();
-        
+        statement.executeUpdate();        
         statement.close();
+        
+        PreparedStatement statement2 = connection.prepareStatement("DELETE FROM ReseptinAinesosa "
+                + "WHERE ReseptinAinesosa.resepti_id = ?");
+        statement2.setInt(1, key);
+        statement2.executeUpdate();
+        
+        statement2.close();
         connection.close();
     }
         

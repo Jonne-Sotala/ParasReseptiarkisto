@@ -80,7 +80,7 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
         Connection connection = database.getConnection();
         PreparedStatement statement
                 = connection.prepareStatement("SELECT * FROM ReseptinAinesosa "
-                        + "WHERE Reseptinainesosa.resepti_id = ?");
+                        + "WHERE ReseptinAinesosa.resepti_id = ?");
         statement.setInt(1, key);
         ResultSet rs = statement.executeQuery();
         
@@ -95,6 +95,21 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
                     rs.getString("ohje")));
         } 
         return ainesosat;
+    }
+    
+    public Integer raakaaineenKayttoMaaraByKey(Integer key) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM ReseptinAinesosa "
+                + "WHERE ReseptinAinesosa.raakaaine_id = ?");
+        statement.setInt(1, key);
+        ResultSet rs = statement.executeQuery();
+        
+        int maara = 0;
+        while (rs.next()) {
+            maara++;
+        }
+        
+        return maara;
     }
 
     @Override

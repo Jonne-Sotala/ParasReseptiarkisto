@@ -64,7 +64,7 @@ public class ReseptinAinesosa {
 
     public void setOhje(String ohje) {
         this.ohje = ohje;
-    }  
+    }
     
     @Override
     public String toString() {

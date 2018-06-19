@@ -38,7 +38,7 @@
         <p>Lis&#228tyt raaka-aineet:</p>
         <ul>
             <li th:each="raakaaine: ${raakaainelista}">
-                <span th:text="${raakaaine.nimi}"></span>
+                <span th:text="${raakaaine}"></span>
             </li>
         </ul>
 
@@ -55,7 +55,9 @@
             painamalla poista nappia reseptin alapuolella.<br/><br/>
             <b>4. Raaka-aineiden poistaminen</b><br/>
             Voit poistaa lis&#228;ttyj&#228; raaka-aineita "Lis&#228;&#228; raaka-aine" sivulla 
-            painamalla poista nappia raaka-aineen alapuolella.
+            painamalla poista nappia raaka-aineen alapuolella.<br/><br/>
+            <b>5. Raaka-aineiden tilastot</b><br/>
+            Raaka-aineiden tilastot n&#228;et t&#228;ll&#228; p&#228;&#228;sivulla suluissa lis&#228;ttyjen raaka-aineiden j&#228;lkeen.
             
         </p>
 

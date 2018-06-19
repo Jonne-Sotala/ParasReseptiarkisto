@@ -26,20 +26,24 @@ public class ReseptiSovellus {
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
-        
+
         Database database = new Database("jdbc:sqlite:reseptit.db");
         ReseptiDao reseptiDao = new ReseptiDao(database);
         RaakaAineDao raakaAineDao = new RaakaAineDao(database);
         ReseptinAinesosaDao reseptinAinesosaDao
                 = new ReseptinAinesosaDao(database, reseptiDao, raakaAineDao);
         reseptiDao.setReseptinAinesosaDao(reseptinAinesosaDao);
-        
-        
+
         // Pääsivu
         Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("reseptilista", reseptiDao.findAll());
-            map.put("raakaainelista", raakaAineDao.findAll());
+            List<String> raakaainelista = new ArrayList<>();
+            for (RaakaAine raakaaine : raakaAineDao.findAll()) {
+                raakaainelista.add(raakaaine.toString() + " (käytetty "
+                        + reseptinAinesosaDao.raakaaineenKayttoMaaraByKey(raakaaine.getId()) + " reseptissä)");
+            }
+            map.put("raakaainelista", raakaainelista);
 
             return new ModelAndView(map, "paasivu");
         }, new ThymeleafTemplateEngine());
@@ -54,10 +58,14 @@ public class ReseptiSovellus {
 
         // Raaka-aineiden lisääminen
         Spark.post("/raakaaine/lisaa", (req, res) -> {
-            raakaAineDao.saveOrUpdate(new RaakaAine(-1, req.queryParams("raaka-aine")));
+            if (req.queryParams("raaka-aine").length() > 0) {
+                raakaAineDao.saveOrUpdate(new RaakaAine(-1, req.queryParams("raaka-aine")));
+                res.redirect("/raakaaine");
+                return "Raaka-aine lisätty";
+            }
 
             res.redirect("/raakaaine");
-            return "Raaka-aine lisätty";
+            return "Raaka-aine ei lisätty";
         });
 
         // Raaka-aineiden poistaminen
@@ -79,10 +87,15 @@ public class ReseptiSovellus {
 
         // Reseptien lisääminen
         Spark.post("/resepti/lisaa", (req, res) -> {
-            reseptiDao.saveOrUpdate(new Resepti(-1, req.queryParams("resepti"), new ArrayList<>()));
+
+            if (req.queryParams("resepti").length() > 0) {
+                reseptiDao.saveOrUpdate(new Resepti(-1, req.queryParams("resepti"), new ArrayList<>()));
+                res.redirect("/resepti");
+                return "Resepti lisätty";
+            }
 
             res.redirect("/resepti");
-            return "Resepti lisätty";
+            return "Resepti ei lisätty";
         });
 
         // Reseptin poistaminen
