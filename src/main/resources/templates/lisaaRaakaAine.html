@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8"/>
+        <style>
+            body {
+                background-color: #F0FFFF;
+            }
+        </style>
+        <title>Reseptiarkisto - raaka-aineen lis&#228;ys</title>
+    </head>
+    <body>
+
+        <h2>Lis&#228;&#228; raaka-aine</h2>
+        
+        <form method="POST" action="/raakaaine/lisaa">
+            Raaka-aineen nimi:<br/>
+            <input type="text" name="raaka-aine"/>
+            <input type="submit" value="Lis&#228;&#228; raaka-aine"/>
+        </form>
+        
+        <p>Lis&#228;tyt raaka-aineet:</p>
+        <ul>
+            <li th:each="raakaaine: ${raakaainelista}">
+                <span th:text="${raakaaine.nimi}"></span>
+                <form method="POST" th:action="@{~/raakaaine/poista/{raakaaineId}(raakaaineId=${raakaaine.id})}">
+                    <input type="submit" value="Poista"/>
+                </form> 
+            </li>
+        </ul>
+        
+        <a href="../../">Takaisin</a>
+    </body>
+</html>

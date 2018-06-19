@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8"/>
+        <style>
+            body {
+                background-color: #F0FFFF;
+            }
+        </style>
+        <title>Reseptiarkisto</title>
+    </head>
+    <body>
+
+        <h1>Tervetuloa reseptiarkistoon!</h1>
+
+        <p>T&#228;m&#228; sivusto sis&#228;lt&#228;&#228; monien eri k&#228;ytt&#228;jien reseptej&#228;. 
+            Voit lis&#228;t&#228; my&#246;s omiasi. Hauskaa kokkaamista!!</p>
+
+        <form method="GET" action="/resepti">
+            <input type="submit" value="Lis&#228;&#228; resepti"/>
+        </form>
+
+        <form method="GET" action="/raakaaine">
+            <input type="submit" value="Lis&#228;&#228; raaka-aine"/>
+        </form>
+
+        <p>Reseptit:</p>
+        <ol>
+            <li th:each="resepti: ${reseptilista}">
+                <span th:text="${resepti.nimi}"></span>
+                <form method="GET" th:action="@{~/resepti/katso/{reseptiId}(reseptiId=${resepti.id})}">
+                    <input type="submit" value="Katso resepti"/>
+                </form>
+            </li>
+        </ol>
+
+        <p>Lis&#228tyt raaka-aineet:</p>
+        <ul>
+            <li th:each="raakaaine: ${raakaainelista}">
+                <span th:text="${raakaaine.nimi}"></span>
+            </li>
+        </ul>
+
+        <h2>Sivun k&#228;ytt&#246;ohje:</h2>
+        <p>
+            <b>1. Reseptien lis&#228;&#228;minen</b><br/>
+            Lis&#228;&#228; ensin tarvittavat raaka-aineet. Sen j&#228;lkeen lis&#228;&#228; resepti.<br/>
+            Reseptin lis&#228;&#228;misen j&#228;lkeen liit&#228; raaka-aineet reseptiin 
+            (t&#228;m&#228; my&#246;s "Lis&#228;&#228; resepti" sivulla).<br/><br/>
+            <b>2. Reseptien tarkkailu</b><br/>
+            Tarkkaile reseptej&#228; painamalla kyseisen reseptin kohdalla painiketta "Katso resepti"
+            
+        </p>
+
+    </body>
+</html>
