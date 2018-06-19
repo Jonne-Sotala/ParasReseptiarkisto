@@ -41,7 +41,7 @@ public class ReseptiSovellus {
             map.put("reseptilista", reseptiDao.findAll());
             map.put("raakaainelista", raakaAineDao.findAll());
 
-            return new ModelAndView(map, "reseptit");
+            return new ModelAndView(map, "paasivu");
         }, new ThymeleafTemplateEngine());
 
         // Raaka-aine sivu
@@ -49,7 +49,7 @@ public class ReseptiSovellus {
             HashMap map = new HashMap<>();
             map.put("raakaainelista", raakaAineDao.findAll());
 
-            return new ModelAndView(map, "lisaaRaakaAine");
+            return new ModelAndView(map, "raakaaineet");
         }, new ThymeleafTemplateEngine());
 
         // Raaka-aineiden lisääminen
@@ -74,7 +74,7 @@ public class ReseptiSovellus {
             map.put("reseptilista", reseptiDao.findAll());
             map.put("raakaainelista", raakaAineDao.findAll());
 
-            return new ModelAndView(map, "lisaaResepti");
+            return new ModelAndView(map, "reseptit");
         }, new ThymeleafTemplateEngine());
 
         // Reseptien lisääminen
@@ -121,7 +121,7 @@ public class ReseptiSovellus {
             map.put("resepti", resepti);
             map.put("ainesosat", resepti.getAinesosat());
 
-            return new ModelAndView(map, "reseptiInfo");
+            return new ModelAndView(map, "katsoResepti");
         }, new ThymeleafTemplateEngine());
     }
 }

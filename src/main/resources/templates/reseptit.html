@@ -8,50 +8,61 @@
                 background-color: #F0FFFF;
             }
         </style>
-        <title>Reseptiarkisto</title>
+        <title>Reseptiarkisto - reseptin lis&#228;ys</title>
     </head>
     <body>
 
-        <h1>Tervetuloa reseptiarkistoon!</h1>
-
-        <p>T&#228;m&#228; sivusto sis&#228;lt&#228;&#228; monien eri k&#228;ytt&#228;jien reseptej&#228;. 
-            Voit lis&#228;t&#228; my&#246;s omiasi. Hauskaa kokkaamista!!</p>
-
-        <form method="GET" action="/resepti">
+        <h2>Lis&#228;&#228; resepti</h2>
+        
+        <form method="POST" action="/resepti/lisaa">
+            Reseptin nimi:<br/>
+            <input type="text" name="resepti"/>
             <input type="submit" value="Lis&#228;&#228; resepti"/>
         </form>
-
-        <form method="GET" action="/raakaaine">
-            <input type="submit" value="Lis&#228;&#228; raaka-aine"/>
-        </form>
-
-        <p>Reseptit:</p>
+        
+        <p>Lis&#228;tyt reseptit:</p>
         <ol>
             <li th:each="resepti: ${reseptilista}">
                 <span th:text="${resepti.nimi}"></span>
-                <form method="GET" th:action="@{~/resepti/katso/{reseptiId}(reseptiId=${resepti.id})}">
-                    <input type="submit" value="Katso resepti"/>
-                </form>
+                <form method="POST" th:action="@{~/resepti/poista/{reseptiId}(reseptiId=${resepti.id})}">
+                    <input type="submit" value="Poista"/>
+                </form> 
             </li>
         </ol>
-
-        <p>Lis&#228tyt raaka-aineet:</p>
+        
+        <p>K&#228;ytett&#228;v&#228;t raaka-aineet:</p>
         <ul>
             <li th:each="raakaaine: ${raakaainelista}">
                 <span th:text="${raakaaine.nimi}"></span>
             </li>
         </ul>
-
-        <h2>Sivun k&#228;ytt&#246;ohje:</h2>
+        
+        <h2>Liit&#228; raaka-aineita reseptiin</h2>
+        
+        
+        <form method="POST" action="/resepti/liita">
+            Resepti: <br/>
+            <input type="text" name="resepti"/><br/>
+            Raaka-aine: <br/>
+            <input type="text" name="raaka-aine"/><br/>
+            Lis&#228;&#228;misj&#228;rjestys:<br/>
+            <input type="text" name="jarjestys"/><br/>
+            M&#228;&#228;r&#228;:<br/>
+            <input type="text" name="maara"/><br/>
+            Ohje:<br/>
+            <input type="text" name="ohje"/><br/>
+            <input type="submit" value="Liit&#228; reseptiin"/>
+        </form><br/>
+        
+        <h3>Ohje liitt&#228;miseen</h3>
         <p>
-            <b>1. Reseptien lis&#228;&#228;minen</b><br/>
-            Lis&#228;&#228; ensin tarvittavat raaka-aineet. Sen j&#228;lkeen lis&#228;&#228; resepti.<br/>
-            Reseptin lis&#228;&#228;misen j&#228;lkeen liit&#228; raaka-aineet reseptiin 
-            (t&#228;m&#228; my&#246;s "Lis&#228;&#228; resepti" sivulla).<br/><br/>
-            <b>2. Reseptien tarkkailu</b><br/>
-            Tarkkaile reseptej&#228; painamalla kyseisen reseptin kohdalla painiketta "Katso resepti"
-            
+            1. Kirjoita reseptin nimi Resepti-kentt&#228;&#228;n. Varmista, ett&#228; olet lis&#228;nnyt reseptin.<br/>
+            2. Kirjoita raaka-aineen nimi Raaka-aine kentt&#228;&#228;n. Varmista, ett&#228; raaka-aine on lis&#228;tty.<br/>
+            3. Kirjoita raaka-aineen lis&#228;&#228;misj&#228;rjestysnumero. Esimerkiksi 1 tai 3.<br/>
+            4. Kirjoita lis&#228;tt&#228;v&#228;n raaka-aineen m&#228;&#228;r&#228;. Esimerkiksi "2 kpl" tai "500 g"<br/>
+            5. Kirjoita viimeiseksi ohjeistus miten raaka-aine tulee valmistella tai lis&#228;t&#228;. Esimerkiksi "Viipaloi kurkku ja lis&#228;&#228; pataan"
         </p>
-
+        
+        <a href="../../">Takaisin</a>
     </body>
 </html>
