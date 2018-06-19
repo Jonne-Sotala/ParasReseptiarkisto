@@ -92,21 +92,21 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
 
     @Override
     public void delete(Integer key) throws SQLException {
-        Connection connection = database.getConnection();
-        
+        Connection connection = database.getConnection();        
         PreparedStatement statement = connection.prepareStatement("DELETE FROM ReseptinAinesosa "
                 + "WHERE ReseptinAinesosa.raakaaine_id = ?");
         statement.setInt(1, key);
         statement.executeUpdate();
         statement.close();
+        connection.close();
         
+        Connection connection2 = database.getConnection();
         PreparedStatement statement2 = 
-                connection.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
+                connection2.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
         statement2.setInt(1, key);
         statement2.executeUpdate();
-        statement2.close();
-        
-        connection.close();
+        statement2.close();        
+        connection2.close();
     }
     
     

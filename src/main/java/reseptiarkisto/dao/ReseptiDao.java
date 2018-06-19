@@ -109,20 +109,20 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-
         PreparedStatement statement = connection.prepareStatement("DELETE FROM ReseptinAinesosa "
                 + "WHERE ReseptinAinesosa.resepti_id = ?");
         statement.setInt(1, key);
         statement.executeUpdate();
         statement.close();
+        connection.close();
 
+        Connection connection2 = database.getConnection();
         PreparedStatement statement2
-                = connection.prepareStatement("DELETE FROM Resepti WHERE id = ?");
+                = connection2.prepareStatement("DELETE FROM Resepti WHERE id = ?");
         statement2.setInt(1, key);
         statement2.executeUpdate();
-        statement2.close();
-        
-        connection.close();
+        statement2.close();        
+        connection2.close();
     }
 
 }
