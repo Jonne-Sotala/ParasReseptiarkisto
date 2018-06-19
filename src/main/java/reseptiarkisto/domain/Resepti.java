@@ -1,4 +1,4 @@
-package parasreseptiarkisto.domain;
+package reseptiarkisto.domain;
 
 import java.util.List;
 

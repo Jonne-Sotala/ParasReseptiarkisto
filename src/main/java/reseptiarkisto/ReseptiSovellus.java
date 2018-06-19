@@ -1,4 +1,4 @@
-package parasreseptiarkisto;
+package reseptiarkisto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import parasreseptiarkisto.dao.RaakaAineDao;
-import parasreseptiarkisto.dao.ReseptiDao;
-import parasreseptiarkisto.dao.ReseptinAinesosaDao;
-import parasreseptiarkisto.database.Database;
-import parasreseptiarkisto.domain.RaakaAine;
-import parasreseptiarkisto.domain.Resepti;
-import parasreseptiarkisto.domain.ReseptinAinesosa;
+import reseptiarkisto.dao.RaakaAineDao;
+import reseptiarkisto.dao.ReseptiDao;
+import reseptiarkisto.dao.ReseptinAinesosaDao;
+import reseptiarkisto.database.Database;
+import reseptiarkisto.domain.RaakaAine;
+import reseptiarkisto.domain.Resepti;
+import reseptiarkisto.domain.ReseptinAinesosa;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;

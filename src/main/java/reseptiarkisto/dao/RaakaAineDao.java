@@ -1,4 +1,4 @@
-package parasreseptiarkisto.dao;
+package reseptiarkisto.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import parasreseptiarkisto.database.Database;
-import parasreseptiarkisto.domain.RaakaAine;
+import reseptiarkisto.database.Database;
+import reseptiarkisto.domain.RaakaAine;
 
 public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     

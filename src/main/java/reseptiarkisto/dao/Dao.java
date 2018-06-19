@@ -1,5 +1,5 @@
 
-package parasreseptiarkisto.dao;
+package reseptiarkisto.dao;
 
 import java.sql.*;
 import java.util.*;

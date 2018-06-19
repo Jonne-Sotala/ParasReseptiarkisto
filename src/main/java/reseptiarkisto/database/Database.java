@@ -1,4 +1,4 @@
-package parasreseptiarkisto.database;
+package reseptiarkisto.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package parasreseptiarkisto.dao;
+package reseptiarkisto.dao;
 
 import com.sun.corba.se.spi.orbutil.fsm.StateImpl;
 import java.sql.Connection;
@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import parasreseptiarkisto.database.Database;
-import parasreseptiarkisto.domain.Resepti;
-import parasreseptiarkisto.domain.ReseptinAinesosa;
+import reseptiarkisto.database.Database;
+import reseptiarkisto.domain.Resepti;
+import reseptiarkisto.domain.ReseptinAinesosa;
 
 public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
 

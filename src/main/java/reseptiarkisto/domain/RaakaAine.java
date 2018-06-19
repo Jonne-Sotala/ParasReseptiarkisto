@@ -1,4 +1,4 @@
-package parasreseptiarkisto.domain;
+package reseptiarkisto.domain;
 
 public class RaakaAine {
     private Integer id;
