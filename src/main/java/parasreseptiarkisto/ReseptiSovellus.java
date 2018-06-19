@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import parasreseptiarkisto.dao.RaakaAineDao;
+import parasreseptiarkisto.dao.ReseptiDao;
+import parasreseptiarkisto.dao.ReseptinAinesosaDao;
 import parasreseptiarkisto.database.Database;
 import spark.ModelAndView;
 import spark.Spark;
@@ -19,9 +22,15 @@ public class ReseptiSovellus {
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
+        
+        Database database = new Database("jdbc:sqlite:reseptit.db");
+        ReseptiDao reseptiDao = new ReseptiDao(database);
+        RaakaAineDao raakaAineDao = new RaakaAineDao(database);
+        ReseptinAinesosaDao reseptinAinesosaDao
+                = new ReseptinAinesosaDao(database, reseptiDao, raakaAineDao);
+        reseptiDao.setReseptinAinesosaDao(reseptinAinesosaDao);
 
         System.out.println("Hello world!");
-        Database database = new Database("jdbc:sqlite:reseptit.db");
 
         Spark.get("*", (req, res) -> {
 
@@ -71,14 +80,5 @@ public class ReseptiSovellus {
             res.redirect("/");
             return "";
         });
-    }
-
-    public static Connection getConnection() throws Exception {
-        String dbUrl = System.getenv("JDBC_DATABASE_URL");
-        if (dbUrl != null && dbUrl.length() > 0) {
-            return DriverManager.getConnection(dbUrl);
-        }
-
-        return DriverManager.getConnection("jdbc:sqlite:reseptit.db");
     }
 }
