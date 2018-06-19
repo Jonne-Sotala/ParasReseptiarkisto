@@ -11,14 +11,14 @@ import reseptiarkisto.domain.Resepti;
 import reseptiarkisto.domain.ReseptinAinesosa;
 
 public class ReseptiDao implements Dao<Resepti, Integer> {
-    
-        private Database database;
-        private ReseptinAinesosaDao reseptinAinesosaDao;
-        
-        public ReseptiDao(Database database) {
-            this.database = database;
-            this.reseptinAinesosaDao = null;
-        }
+
+    private Database database;
+    private ReseptinAinesosaDao reseptinAinesosaDao;
+
+    public ReseptiDao(Database database) {
+        this.database = database;
+        this.reseptinAinesosaDao = null;
+    }
 
     public void setReseptinAinesosaDao(ReseptinAinesosaDao reseptionAinesosaDao) {
         this.reseptinAinesosaDao = reseptionAinesosaDao;
@@ -31,43 +31,43 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
     @Override
     public Resepti findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement statement = 
-                connection.prepareStatement("SELECT * FROM Resepti WHERE id = ?");
+        PreparedStatement statement
+                = connection.prepareStatement("SELECT * FROM Resepti WHERE id = ?");
         statement.setInt(1, key);
         ResultSet rs = statement.executeQuery();
-        
+
         if (!rs.next()) {
             return null;
         }
-        
-        Resepti resepti = new Resepti(rs.getInt("id"), rs.getString("nimi"), 
-                                      null);
-        
+
+        Resepti resepti = new Resepti(rs.getInt("id"), rs.getString("nimi"),
+                null);
+
         rs.close();
         statement.close();
         connection.close();
-        
+
         return resepti;
     }
-    
+
     public Resepti findOneByName(String nimi) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement statement = 
-                connection.prepareStatement("SELECT * FROM Resepti WHERE nimi = ?");
+        PreparedStatement statement
+                = connection.prepareStatement("SELECT * FROM Resepti WHERE nimi = ?");
         statement.setString(1, nimi);
         ResultSet rs = statement.executeQuery();
-        
+
         if (!rs.next()) {
             return null;
         }
-        
-        Resepti resepti = new Resepti(rs.getInt("id"), rs.getString("nimi"), 
-                                      null);
-        
+
+        Resepti resepti = new Resepti(rs.getInt("id"), rs.getString("nimi"),
+                null);
+
         rs.close();
         statement.close();
         connection.close();
-        
+
         return resepti;
     }
 
@@ -75,53 +75,54 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
     public List<Resepti> findAll() throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Resepti");
-        
+
         ResultSet rs = statement.executeQuery();
-        
+
         List<Resepti> reseptit = new ArrayList<>();
-        while(rs.next()) {
-            reseptit.add(new Resepti(rs.getInt("id"), rs.getString("nimi"), 
-                                     null));
+        while (rs.next()) {
+            reseptit.add(new Resepti(rs.getInt("id"), rs.getString("nimi"),
+                    null));
         }
-        
+
         rs.close();
         statement.close();
         connection.close();
-        
+
         return reseptit;
     }
 
     @Override
     public Resepti saveOrUpdate(Resepti resepti) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement statement = 
-                connection.prepareStatement("INSERT INTO Resepti (nimi)"
+        PreparedStatement statement
+                = connection.prepareStatement("INSERT INTO Resepti (nimi)"
                         + " VALUES (?)");
-        statement.setString(1, resepti.getNimi());        
+        statement.setString(1, resepti.getNimi());
         statement.executeUpdate();
-        
+
         statement.close();
         connection.close();
-        
+
         return null;
     }
 
     @Override
     public void delete(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement statement = 
-                connection.prepareStatement("DELETE FROM Resepti WHERE id = ?");
-        statement.setInt(1, key);
-        statement.executeUpdate();        
-        statement.close();
-        
-        PreparedStatement statement2 = connection.prepareStatement("DELETE FROM ReseptinAinesosa "
+
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM ReseptinAinesosa "
                 + "WHERE ReseptinAinesosa.resepti_id = ?");
+        statement.setInt(1, key);
+        statement.executeUpdate();
+        statement.close();
+
+        PreparedStatement statement2
+                = connection.prepareStatement("DELETE FROM Resepti WHERE id = ?");
         statement2.setInt(1, key);
         statement2.executeUpdate();
-        
         statement2.close();
+        
         connection.close();
     }
-        
+
 }
