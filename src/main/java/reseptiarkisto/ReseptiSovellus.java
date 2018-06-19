@@ -108,6 +108,11 @@ public class ReseptiSovellus {
 
         // Raaka-aineiden liittäminen reseptiin
         Spark.post("/resepti/liita", (req, res) -> {
+            if (reseptiDao.findOneByName(req.queryParams("resepti")) == null
+                    || raakaAineDao.findOneByName(req.queryParams("raaka-aine")) == null) {
+                res.redirect("/resepti/vaaratieto");
+                return "Raaka-aine ei liitetty";
+            }
             reseptinAinesosaDao.saveOrUpdate(new ReseptinAinesosa(
                     -1,
                     reseptiDao.findOneByName(req.queryParams("resepti")),
@@ -119,6 +124,13 @@ public class ReseptiSovellus {
             res.redirect("/resepti");
             return "Raaka-aine liitetty";
         });
+        
+        // Tiedote väärästä reseptin tai raaka-aineen nimestä
+        Spark.get("/resepti/vaaratieto", (req, res) -> {
+            HashMap map = new HashMap<>();
+            
+            return new ModelAndView(map, "vaaratieto");
+        }, new ThymeleafTemplateEngine());
 
         // Reseptin tarkastelu
         Spark.get("/resepti/katso/:id", (req, res) -> {
