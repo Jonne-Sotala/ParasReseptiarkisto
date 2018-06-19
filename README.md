@@ -1,2 +1,2 @@
-# ParasReseptiarkisto
+# Reseptiarkisto
 Tietokantojen perusteiden kurssityö
