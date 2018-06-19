@@ -5,12 +5,12 @@ import java.util.List;
 public class Resepti {
     private Integer id;
     private String nimi;
-    private List<ReseptinAinesosa> ainekset;
+    private List<ReseptinAinesosa> ainesosat;
 
-    public Resepti(Integer id, String nimi, List<ReseptinAinesosa> ainekset) {
+    public Resepti(Integer id, String nimi, List<ReseptinAinesosa> ainesosat) {
         this.id = id;
         this.nimi = nimi;
-        this.ainekset = ainekset;
+        this.ainesosat = ainesosat;
     }
 
     public Integer getId() {
@@ -21,8 +21,8 @@ public class Resepti {
         return nimi;
     }
 
-    public List<ReseptinAinesosa> getAinekset() {
-        return ainekset;
+    public List<ReseptinAinesosa> getAinesosat() {
+        return ainesosat;
     }
 
     public void setId(Integer id) {
@@ -33,8 +33,12 @@ public class Resepti {
         this.nimi = nimi;
     }
     
+    public void setAinesosat(List<ReseptinAinesosa> ainesosat) {
+        this.ainesosat = ainesosat;
+    }
+    
     public void lisaaRaakaAine(ReseptinAinesosa ainesosa) {
-        ainekset.add(ainesosa);
+        ainesosat.add(ainesosa);
     }
     
     @Override

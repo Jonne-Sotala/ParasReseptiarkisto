@@ -41,7 +41,7 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
         }
         
         Resepti resepti = new Resepti(rs.getInt("id"), rs.getString("nimi"), 
-                                      reseptinAinesosaDao.findReseptinAinesosatByKey(key));
+                                      null);
         
         rs.close();
         statement.close();
@@ -62,7 +62,7 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
         }
         
         Resepti resepti = new Resepti(rs.getInt("id"), rs.getString("nimi"), 
-                                      reseptinAinesosaDao.findReseptinAinesosatByKey(rs.getInt("id")));
+                                      null);
         
         rs.close();
         statement.close();
@@ -81,7 +81,7 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
         List<Resepti> reseptit = new ArrayList<>();
         while(rs.next()) {
             reseptit.add(new Resepti(rs.getInt("id"), rs.getString("nimi"), 
-                                     reseptinAinesosaDao.findReseptinAinesosatByKey(rs.getInt("id"))));
+                                     null));
         }
         
         rs.close();

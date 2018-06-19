@@ -72,6 +72,7 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
         statement.close();
         connection.close();
 
+       
         return ainesosat;
     }
     
@@ -92,8 +93,7 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
                     rs.getInt("lisaamisjarjestys"),
                     rs.getString("maara"),
                     rs.getString("ohje")));
-        }
-                
+        } 
         return ainesosat;
     }
 
@@ -101,13 +101,13 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
     public ReseptinAinesosa saveOrUpdate(ReseptinAinesosa ainesosa) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO ReseptinAinesosa"
-                + " (id, resepti_id, raakaaine_id, lisaamisjarjestys, maara, ohje)"
-                + " VALUES (?, ?, ?, ?, ?, ?");
-//        statement.setInt(2, ainesosa.getResepti().getId());
-//        statement.setInt(3, ainesosa.getRaakaaine().getId());
-        statement.setInt(4, ainesosa.getLisaamisjarjestys());
-        statement.setString(5, ainesosa.getMaara());
-        statement.setString(6, ainesosa.getOhje());
+                + " (resepti_id, raakaaine_id, lisaamisjarjestys, maara, ohje)"
+                + " VALUES (?, ?, ?, ?, ?)");
+        statement.setInt(1, ainesosa.getResepti().getId());
+        statement.setInt(2, ainesosa.getRaakaaine().getId());
+        statement.setInt(3, ainesosa.getLisaamisjarjestys());
+        statement.setString(4, ainesosa.getMaara());
+        statement.setString(5, ainesosa.getOhje());
         statement.executeUpdate();
         
         statement.close();

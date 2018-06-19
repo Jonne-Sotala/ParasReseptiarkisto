@@ -33,7 +33,9 @@ public class ReseptiSovellus {
         ReseptinAinesosaDao reseptinAinesosaDao
                 = new ReseptinAinesosaDao(database, reseptiDao, raakaAineDao);
         reseptiDao.setReseptinAinesosaDao(reseptinAinesosaDao);
-        System.out.println("Hello world!");
+        
+        System.out.println(reseptiDao.findOne(2).getAinesosat());
+        
         
         // Pääsivu
         Spark.get("/", (req, res) -> {
@@ -112,13 +114,14 @@ public class ReseptiSovellus {
             HashMap map = new HashMap<>();
 
             Resepti resepti = reseptiDao.findOne(Integer.parseInt(req.params(":id")));
+            resepti.setAinesosat(reseptinAinesosaDao.findReseptinAinesosatByKey(resepti.getId()));
 
-            List<ReseptinAinesosa> ainesosat = resepti.getAinekset().stream().sorted((a1, a2) -> {
+            List<ReseptinAinesosa> ainesosat = resepti.getAinesosat().stream().sorted((a1, a2) -> {
                 return a1.getLisaamisjarjestys() - a2.getLisaamisjarjestys();
             }).collect(Collectors.toCollection(ArrayList::new));
 
             map.put("resepti", resepti);
-            map.put("ainesosat", resepti.getAinekset());
+            map.put("ainesosat", resepti.getAinesosat());
 
             return new ModelAndView(map, "reseptiInfo");
         }, new ThymeleafTemplateEngine());
