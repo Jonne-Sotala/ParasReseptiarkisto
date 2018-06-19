@@ -1,4 +1,4 @@
-package tikape.parasreseptiarkisto;
+package parasreseptiarkisto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
