@@ -80,8 +80,8 @@ public class RaakaAineDao implements Dao<RaakaAine, Integer> {
     public RaakaAine saveOrUpdate(RaakaAine raakaAine) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement statement = 
-                connection.prepareStatement("INSERT INTO RaakaAine (id, nimi) VALUES (?, ?)");
-        statement.setString(2, raakaAine.getNimi());
+                connection.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
+        statement.setString(1, raakaAine.getNimi());
         statement.executeUpdate();
         
         statement.close();
