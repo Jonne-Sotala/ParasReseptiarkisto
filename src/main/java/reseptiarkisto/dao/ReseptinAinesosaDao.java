@@ -46,7 +46,7 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
         rs.close();
         statement.close();
         connection.close();
-
+        
         return ainesosa;
     }
 
@@ -70,9 +70,8 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
 
         rs.close();
         statement.close();
-        connection.close();
-
-       
+        connection.close();  
+        
         return ainesosat;
     }
     
@@ -94,6 +93,11 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
                     rs.getString("maara"),
                     rs.getString("ohje")));
         } 
+        
+        rs.close();
+        statement.close();
+        connection.close();
+        
         return ainesosat;
     }
     
@@ -108,6 +112,10 @@ public class ReseptinAinesosaDao implements Dao<ReseptinAinesosa, Integer> {
         while (rs.next()) {
             maara++;
         }
+        
+        rs.close();
+        statement.close();
+        connection.close(); 
         
         return maara;
     }
