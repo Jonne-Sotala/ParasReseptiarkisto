@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import parasreseptiarkisto.database.Database;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -20,13 +21,14 @@ public class ReseptiSovellus {
         }
 
         System.out.println("Hello world!");
+        Database database = new Database("jdbc:sqlite:reseptit.db");
 
         Spark.get("*", (req, res) -> {
 
             List<String> reseptit = new ArrayList<>();
 
             // avaa yhteys tietokantaan
-            Connection conn = getConnection();
+            Connection conn = database.getConnection();
 
             // tee kysely
             PreparedStatement stmt
@@ -54,7 +56,7 @@ public class ReseptiSovellus {
                     + req.queryParams("huonekalu"));
 
             // avaa yhteys tietokantaan
-            Connection conn = getConnection();
+            Connection conn = database.getConnection();
 
             // tee kysely
             PreparedStatement stmt
