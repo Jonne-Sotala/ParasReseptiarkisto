@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* parasreseptiarkisto.ReseptiSovellus
+web:    java -cp target/classes:target/dependency/* reseptiarkisto.ReseptiSovellus
