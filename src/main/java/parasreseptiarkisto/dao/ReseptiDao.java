@@ -95,9 +95,9 @@ public class ReseptiDao implements Dao<Resepti, Integer> {
     public Resepti saveOrUpdate(Resepti resepti) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement statement = 
-                connection.prepareStatement("INSERT INTO Resepti (id, nimi)"
-                        + " VALUES (?, ?)");
-        statement.setString(2, resepti.getNimi());        
+                connection.prepareStatement("INSERT INTO Resepti (nimi)"
+                        + " VALUES (?)");
+        statement.setString(1, resepti.getNimi());        
         statement.executeUpdate();
         
         statement.close();

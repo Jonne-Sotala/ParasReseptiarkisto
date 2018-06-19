@@ -122,54 +122,5 @@ public class ReseptiSovellus {
 
             return new ModelAndView(map, "reseptiInfo");
         }, new ThymeleafTemplateEngine());
-
-//        Spark.get("*", (req, res) -> {
-//
-//            List<String> reseptit = new ArrayList<>();
-//
-//            // avaa yhteys tietokantaan
-//            Connection conn = database.getConnection();
-//
-//            // tee kysely
-//            PreparedStatement stmt
-//                    = conn.prepareStatement("SELECT nimi FROM Resepti");
-//            ResultSet tulos = stmt.executeQuery();
-//
-//            // käsittele kyselyn tulokset
-//            while (tulos.next()) {
-//                String nimi = tulos.getString("nimi");
-//                reseptit.add(nimi);
-//            }
-//            // sulje yhteys tietokantaan
-//            conn.close();
-//
-//            HashMap map = new HashMap<>();
-//
-//            map.put("lista", reseptit);
-//
-//            return new ModelAndView(map, "index");
-//        }, new ThymeleafTemplateEngine());
-//
-//        Spark.post("*", (req, res) -> {
-//            System.out.println("Hei maailma!");
-//            System.out.println("Saatiin: "
-//                    + req.queryParams("huonekalu"));
-//
-//            // avaa yhteys tietokantaan
-//            Connection conn = database.getConnection();
-//
-//            // tee kysely
-//            PreparedStatement stmt
-//                    = conn.prepareStatement("INSERT INTO Resepti (nimi) VALUES (?)");
-//            stmt.setString(1, req.queryParams("huonekalu"));
-//
-//            stmt.executeUpdate();
-//
-//            // sulje yhteys tietokantaan
-//            conn.close();
-//
-//            res.redirect("/");
-//            return "";
-//        });
     }
 }
