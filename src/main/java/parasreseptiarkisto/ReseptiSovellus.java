@@ -34,8 +34,6 @@ public class ReseptiSovellus {
                 = new ReseptinAinesosaDao(database, reseptiDao, raakaAineDao);
         reseptiDao.setReseptinAinesosaDao(reseptinAinesosaDao);
         
-        System.out.println(reseptiDao.findOne(2).getAinesosat());
-        
         
         // Pääsivu
         Spark.get("/", (req, res) -> {
