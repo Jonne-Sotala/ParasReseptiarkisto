@@ -14,11 +14,11 @@
 
         <h2 th:text="${resepti}">Otsikko</h2>
         
-        <ul>
+        <ol>
             <li th:each="ainesosa : ${ainesosat}">
                 <span th:text="${ainesosa}"></span>
             </li>
-        </ul>
+        </ol>
         
         <a href="../../../">Takaisin</a>
     </body>

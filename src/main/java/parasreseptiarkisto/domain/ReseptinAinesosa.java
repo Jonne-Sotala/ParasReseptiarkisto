@@ -68,6 +68,11 @@ public class ReseptinAinesosa {
     
     @Override
     public String toString() {
-        return lisaamisjarjestys + ". " + raakaaine + ", " + maara;
+        StringBuilder sb = new StringBuilder();
+        sb.append(lisaamisjarjestys +". " + raakaaine +"\n");
+        sb.append("Määrä: " + maara).append("\n");
+        sb.append("Ohje: " + ohje);
+        
+        return raakaaine + ", " + maara + ", " + ohje;
     }
 }
